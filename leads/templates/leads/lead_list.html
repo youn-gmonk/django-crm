@@ -8,7 +8,7 @@
         <div class="w-full mb-6 py-6 flex justify-between items-center border-b border-gray-200">
             <div>
                 <h1 class="text-4xl text-gray-800">Leads</h1>
-                <a class="text-gray-500 hover:text-blue-500 py-1" href="{% url 'leads:category-list' %}">
+                <a class="text-gray-500 hover:text-blue-500" href="{% url 'leads:category-list' %}">
                     View categories
                 </a>
             </div>
@@ -137,4 +137,6 @@
     
   </script>
 </section>
+<script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+<script src="https://mediafiles.botpress.cloud/f71160e9-cc44-44b0-86a1-9340786f980e/webchat/config.js" defer></script>
 {% endblock content %}
