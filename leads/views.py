@@ -212,7 +212,7 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
         return context
 
 
-    def queryset(self):
+    def get_queryset(self):
         user = self.request.user
         #initial queryset of leads for entire organisation
         if user.is_organisor:
