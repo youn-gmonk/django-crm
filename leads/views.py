@@ -30,7 +30,7 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
     template_name = "leads/lead_list.html"
     context_object_name = "leads"
 
-    def queryset(self):
+    def get_queryset(self):
         user = self.request.user
 
         #initial queryset of leads for the entire organisation
@@ -96,8 +96,9 @@ class LeadCreateView(OrganisorAndLoginRequiredMixin, generic.CreateView):
         return reverse ("leads:lead-list")
     
     def form_valid(self , form):
-        form.instance.organisation = self.request.user.userprofile
-        #send email
+        lead = form.save(commit=False)
+        lead.organisation = self.request.user.userprofile
+        lead.save()
         send_mail(
             subject = "A lead has been created", 
             message="Go to the site to see the new lead", 
