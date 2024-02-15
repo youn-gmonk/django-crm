@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #intalled
     'crispy_forms',
     'crispy_tailwind',
+    'chartjs',
     #local
     'leads',
     'agents'
