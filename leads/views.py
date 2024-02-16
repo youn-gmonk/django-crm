@@ -7,7 +7,24 @@ from django.views import generic
 from agents.mixins import OrganisorAndLoginRequiredMixin
 from .models import Lead , Agent , Category
 from .forms import LeadForm, LeadModelForm , CustomUserCreationForm, AssignAgentForm , LeadCategoryUpdateForm
+from django.shortcuts import render
+from django.db.models import Count
+from .models import Lead
 
+
+def lead_chart(request):
+    lead_data = Lead.objects.values('date_added__date').annotate(lead_count=Count('id'))
+
+    labels = [str(item['date_added__date']) for item in lead_data]
+    data = [item['lead_count'] for item in lead_data]
+
+    context = {
+        'title': 'Leads Added per Day',
+        'labels': labels,
+        'data': data,
+    }
+
+    return render(request, 'leads/lead_chart.html', context)
 
 
 class SignupView(generic.CreateView):
@@ -266,6 +283,12 @@ class LeadCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
     
     def get_success_url(self):
         return reverse ("leads:lead-detail", kwargs={"pk": self.get_object().id})
+
+
+
+
+
+
 
 
 
