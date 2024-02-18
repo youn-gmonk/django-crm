@@ -8,8 +8,9 @@ from agents.mixins import OrganisorAndLoginRequiredMixin
 from .models import Lead , Agent , Category
 from .forms import LeadForm, LeadModelForm , CustomUserCreationForm, AssignAgentForm , LeadCategoryUpdateForm
 from django.shortcuts import render
-from django.db.models import Count
+from django.db.models import Count, F, ExpressionWrapper, FloatField
 from .models import Lead
+
 
 
 def lead_chart(request):
@@ -23,8 +24,8 @@ def lead_chart(request):
         'labels': labels,
         'data': data,
     }
-
     return render(request, 'leads/lead_chart.html', context)
+
 
 
 class SignupView(generic.CreateView):
@@ -72,7 +73,6 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
 
 
 def lead_list(request):
-    #return HttpResponse("Hello World")
     leads = Lead.objects.all()
     context = {
         "leads":leads
