@@ -3,20 +3,22 @@
 
 {% block content %}
 
-<section class="text-gray-700 body-font overflow-hidden">
+<body class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+<section class="text-gray-700 body-font overflow-hidden bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
     <div class="container px-5 py-24 mx-auto">
-      <div class="lg:w-4/5 mx-auto flex flex-wrap">
-        <div class="w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+        <div class="lg:w-full mx-auto flex flex-wrap">
+            <div class="w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 bg-white rounded-lg shadow-md p-8">
             <h2 class="text-sm title-font text-gray-500 tracking-widest">AGENT</h2>
             <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">{{ agent.user.username }}</h1>
-            <div class="flex mb-4">
-                <a href="{% url 'agents:agent-detail' agent.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
-                    Overview
-                </a>
-                <a href="{% url 'agents:agent-update' agent.pk %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
-                    Update Details
-                </a>
-            </div>
+            
+            <div class="flex mb-4 space-x-4">
+                    <a href="{% url 'agents:agent-detail' agent.pk %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
+                        Overview
+                    </a>
+                    <a href="{% url 'agents:agent-update' agent.pk %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1 hover:text-indigo-700">
+                        Update Details
+                    </a>    
+                </div>
             <form form method="post">
                 {% csrf_token %}
                 {{ form|crispy }}
@@ -27,4 +29,5 @@
       </div>
     </div>
   </section>
+  </body>
 {% endblock content %}

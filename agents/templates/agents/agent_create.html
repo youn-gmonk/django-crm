@@ -3,16 +3,16 @@
 
 {% block content %}
 
-<div class="max-w-lg mx-auto">
-
-    <div class="py-5 border-b border-gray-200 mt-5">
-        <a class="hover:text-blue-500 mt-3" href="{% url 'agents:agent-list'%}">
-        Go back to agents
+<body class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+<div class="max-w-lg mx-auto mt-8 p-6 bg-white rounded-md shadow-lg">
+    <div class="py-4 border-b border-gray-200">
+        <a class="text-blue-500 hover:underline mt-3" href="{% url 'agents:agent-list'%}">
+        &larr; Go back to agents
         </a>
     </div>
 
     
-    <h1 class="text-4xl text-gray-800 py-2">Create a new agent</h1>
+    <h1 class="text-4xl text-gray-800 py-2 font-semibold">Create a new agent</h1>
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
@@ -20,5 +20,5 @@
     </form>
 
 </div>
-
+</body>
 {% endblock content%}

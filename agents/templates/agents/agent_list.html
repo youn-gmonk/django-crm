@@ -1,32 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <section class="text-gray-700 body-font">
-        <div class="container px-5 py-24 mx-auto flex flex-wrap">
-            <div class="w-full mb-6 py-6 flex justify-between items-center border-b border-gray-200">
-                <div>
-                    <h1 class="text-4xl text-gray-800">Agents</h1>
-                </div>
-                <div>
-                    <a class="text-gray-500 hover:text-blue-500" href="{% url 'agents:agent-create' %}">Create a new agent</a>
-                </div>
-            </div>
+    <body class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+    <section class="text-white body-font overflow-hidden bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="lg:w-full mx-auto flex flex-wrap">
+            <h1 class="text-4xl text-white">Agents</h1>
+        </div>
+        <div>
+            <a class="text-white hover:text-white " href="{% url 'agents:agent-create' %}">Create a new agent</a>
+        </div>
+    </div>
 
-            <div class="flex flex-col w-full">
-                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+    <div class="flex flex-col w-full">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Full Name
+                                    Full Name
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Email
+                                    Email
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
-                                <span class="sr-only">Edit</span>
+                                    <span class="sr-only">Edit</span>
                                 </th>
                             </tr>
                         </thead>
@@ -46,17 +46,15 @@
                                     </td>
                                 </tr>
                             {% empty %}
-
-                            <p>There are currently no agents</p>
-
+                                <p>There are currently no agents</p>
                             {% endfor %}
                         </tbody>
                     </table>
-                    </div>
-                </div>
                 </div>
             </div>
-
         </div>
-      </section>
+    </div>
+</div>
+</section>
+</body>
 {% endblock content %}
