@@ -2,19 +2,22 @@
 
 {% block content %}
 
+<body class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
 <section class="text-gray-700 body-font">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <div class="container mx-auto px-5 py-8 flex flex-col">
         <div class="w-full mb-8 flex justify-between items-center border-b border-gray-200">
             <div>
-                <h1 class="text-4xl text-blue-600 font-semibold">Leads</h1>
-                <a class="text-gray-600 hover:text-blue-500" href="{% url 'leads:category-list' %}">
-                    View categories 
-                </a>
+                <h1 class="text-white text-4xl font-semibold">Leads</h1>
+                <div class="flex space-x-5">
+                    <a class="text-white font-semibold" href="{% url 'leads:category-list' %}">
+                        View categories 
+                    </a>
+                </div>
             </div>
             {% if request.user.is_organisor %}
             <div>
-                <a class="text-gray-600 hover:text-blue-500" href="{% url 'leads:lead-create' %}">
+                <a class="text-white font-semibold" href="{% url 'leads:lead-create' %}">
                     Create a new lead
                 </a>
             </div>
@@ -86,7 +89,7 @@
                             </tr>
                         {% empty %}
                             <tr>
-                                <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-white-500">
                                     There are currently no leads
                                 </td>
                             </tr>
@@ -98,17 +101,14 @@
 
         {% if unassigned_leads.exists %}
             <div class="mt-8 flex flex-col">
-                <h1 class="text-4xl text-blue-600 font-semibold">Unassigned Leads</h1>
+                <h1 class="text-4xl text-white font-semibold">Unassigned Leads</h1>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                     {% for lead in unassigned_leads %}
                         <div class="bg-white border border-gray-200 p-6 rounded-lg shadow-md">
                             <h2 class="text-lg font-semibold text-gray-900 mb-3">{{ lead.first_name }} {{ lead.last_name }}</h2>
                             <p class="text-gray-600">{{ lead.description }}</p>
                             <a href="{% url 'leads:assign-agent' lead.pk %}" class="mt-3 text-indigo-500 inline-flex items-center">
-                                Assign an agent
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                                </svg>
+                                Assign an agent &rarr;   
                             </a>
                         </div>
                     {% endfor %}
@@ -119,5 +119,6 @@
 </section>
 <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
 <script src="https://mediafiles.botpress.cloud/f71160e9-cc44-44b0-86a1-9340786f980e/webchat/config.js" defer></script>
+</body>
 {% endblock content %}
 
