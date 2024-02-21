@@ -9,6 +9,7 @@
             {% else %}
                 {% if request.user.is_organisor %}
                     <a href="{% url 'leads:lead-chart' %}" class="mr-3 hover:text-gray-900">Lead Analysis</a>
+                    <a href="{% url 'leads:lead-conversion' %}" class="mr-3 hover:text-gray-900">Lead Conversion</a>
                     <a href="{% url 'leads:lead-list' %}" class="mr-3 hover:text-gray-900">Leads</a>    
                 {% endif %}
                 

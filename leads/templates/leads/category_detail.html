@@ -8,29 +8,30 @@
       <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-white">{{ category.name }}</h1>
       <p class="sm:text-4xl text-3xl font-semibold title-font mb-2 text-white">These are the leads under this category</p>
     </div>
+
     <div class="lg:w-2/3 w-full mx-auto overflow-auto bg-white shadow-md rounded-lg">
       <table class="table-auto w-full text-left whitespace-no-wrap">
-        <thead>
+        <thead class="bg-blue-600 text-white">
           <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-bold text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+            <th class="px-3 py-3 text-sm uppercase tracking-wider">
                 First Name
             </th>
-            <th class="px-4 py-3 title-font tracking-wider font-bold text-gray-900 text-sm bg-gray-100">
+            <th class="px-3 py-3 text-sm uppercase tracking-wider">
                 Last Name
             </th>
-            <th class="px-4 py-3 title-font tracking-wider font-bold text-gray-900 text-sm bg-gray-100">
+            <th class="px-3 py-3 text-sm uppercase tracking-wider">
                 Age
             </th>
           </tr>
         </thead>
         <tbody>
             {% for lead in category.leads.all %}
-                <tr>
-                    <td class="px-4 py-3">
-                      <a class="hover:text-blue-500" href="{% url 'leads:lead-detail' lead.pk %}">{{ lead.first_name }}</a>
+                <tr class="bg-white"> 
+                    <td class="px-4 py-3 whitespace-nowrap text-gray-900">
+                      <a class=" text-blue-500 hover:underline" href="{% url 'leads:lead-detail' lead.pk %}">{{ lead.first_name }}</a>
                     </td>
-                    <td class="px-4 py-3">{{ lead.last_name }}</td>
-                    <td class="px-4 py-3">{{ lead.age }}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-gray-900">{{ lead.last_name }}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-indigo-900">{{ lead.age }}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -39,6 +40,5 @@
   </div>
 </section>
 </body>
-
 
 {% endblock content %}

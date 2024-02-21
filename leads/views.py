@@ -8,25 +8,71 @@ from agents.mixins import OrganisorAndLoginRequiredMixin
 from .models import Lead , Agent , Category
 from .forms import LeadForm, LeadModelForm , CustomUserCreationForm, AssignAgentForm , LeadCategoryUpdateForm
 from django.shortcuts import render
-from django.db.models import Count, F, ExpressionWrapper, FloatField
 from .models import Lead
-
+from django.db import models
+from django.db.models import Count, F, ExpressionWrapper, FloatField
+from django.db.models.functions import TruncDay, TruncMonth
+from django.db.models import Count, Case, When, Value, IntegerField
 
 
 def lead_chart(request):
-    lead_data = Lead.objects.values('date_added__date').annotate(lead_count=Count('id'))
+    # Daily lead count
+    daily_lead_data = Lead.objects.values('date_added__date').annotate(lead_count=Count('id'))
+    
+    # Monthly lead count
+    monthly_lead_data = Lead.objects.annotate(month=TruncMonth('date_added')).values('month').annotate(lead_count=Count('id'))
 
-    labels = [str(item['date_added__date']) for item in lead_data]
-    data = [item['lead_count'] for item in lead_data]
+    daily_labels = [str(item['date_added__date']) for item in daily_lead_data]
+    daily_data = [item['lead_count'] for item in daily_lead_data]
+
+    monthly_labels = [str(item['month']) for item in monthly_lead_data]
+    monthly_data = [item['lead_count'] for item in monthly_lead_data]
 
     context = {
-        'title': 'Leads Added per Day',
-        'labels': labels,
-        'data': data,
+        'title': 'Leads Added per Day and Month',
+        'daily_labels': daily_labels,
+        'daily_data': daily_data,
+        'monthly_labels': monthly_labels,
+        'monthly_data': monthly_data,
     }
     return render(request, 'leads/lead_chart.html', context)
 
 
+def lead_conversion(request):
+    # Daily conversion rate
+    daily_conversion_data = Lead.objects.values('date_added__date').annotate(
+        lead_count=Count('id'),
+        converted_count=Count('id', filter=models.Q(category__name='Converted'))
+    )
+    daily_labels = [str(item['date_added__date']) for item in daily_conversion_data]
+    total_leads = [item['lead_count'] for item in daily_conversion_data]
+    converted_leads = [item['converted_count'] for item in daily_conversion_data]
+    conversion_rate_data = [
+        (converted / total) * 100 if total > 0 else 0
+        for total, converted in zip(total_leads, converted_leads)
+    ]
+
+    # Monthly conversion rate
+    monthly_conversion_data = Lead.objects.annotate(month=TruncMonth('date_added')).values('month').annotate(
+        monthly_conversion=ExpressionWrapper(
+            Count('id', filter=models.Q(category__name='Converted')),
+            output_field=FloatField()
+        ) / Count('id', output_field=FloatField()) * 100
+    )
+    monthly_labels = [str(item['month']) for item in monthly_conversion_data]
+    monthly_conversion_data = [item['monthly_conversion'] for item in monthly_conversion_data]
+
+    context = {
+        'title': 'Lead Conversion',
+        'daily_labels': daily_labels,
+        'total_leads': total_leads,
+        'converted_leads': converted_leads,
+        'conversion_rate_data': conversion_rate_data,
+        'monthly_labels': monthly_labels,
+        'monthly_conversion_data': monthly_conversion_data,
+    }
+
+    return render(request, 'leads/lead_conversion.html', context)
 
 class SignupView(generic.CreateView):
     template_name = "registration/signup.html"
@@ -237,8 +283,6 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
         else:
             queryset = Category.objects.filter(organisation=user.agent.organisation)
         return queryset
-
-
 
 
 class CategoryDetailView(LoginRequiredMixin, generic.DetailView):

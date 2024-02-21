@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="max-width: 800px; margin: 0 auto;">
+    <h2 style="text-align: center; color: #333; margin-bottom: 20px;">{{ title }}</h2>
+    <canvas id="conversionChart" width="400" height="200"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var ctx = document.getElementById('conversionChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: {{ daily_labels|safe }},
+          datasets: [
+            {
+              label: 'Total Leads',
+              data: {{ total_leads|safe }},
+              fill: false,
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 2
+            },
+            {
+              label: 'Converted Leads',
+              data: {{ converted_leads|safe }},
+              fill: false,
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 2
+            },
+            {
+              label: 'Conversion Rate (%)',
+              data: {{ conversion_rate_data|safe }},
+              fill: false,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 2,
+              yAxisID: 'y-axis-2'
+            }
+          ]
+        },
+        options: {
+          scales: {
+            x: {
+              ticks: {
+                color: '#555',
+                font: {
+                  size: 12,
+                  weight: 'bold',  
+                },
+              },
+            },
+            y: [
+              {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                id: 'y-axis-1',
+                ticks: {
+                  color: '#555',
+                  font: {
+                    size: 12,
+                  },
+                },
+              },
+              {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                id: 'y-axis-2',
+                grid: {
+                  drawOnChartArea: false,
+                },
+                ticks: {
+                  color: '#555',
+                  font: {
+                    size: 12,
+                  },
+                  max: 100,
+                  min: 0,
+                },
+              }
+            ],
+          },
+        },
+      });
+    });
+  </script>
+
+  <!-- Add a new canvas for the monthly conversion chart -->
+  <div style="max-width: 800px; margin: 20px auto;">
+    <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Monthly Conversion</h2>
+    <canvas id="monthlyConversionChart" width="400" height="200"></canvas>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var monthlyCtx = document.getElementById('monthlyConversionChart').getContext('2d');
+      var monthlyChart = new Chart(monthlyCtx, {
+        type: 'line',
+        data: {
+          labels: {{ monthly_labels|safe }},
+          datasets: [
+            {
+              label: 'Monthly Conversion Rate (%)',
+              data: {{ monthly_conversion_data|safe }},
+              fill: false,
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          scales: {
+            x: {
+              ticks: {
+                color: '#555',
+                font: {
+                  size: 12,
+                  weight: 'bold',  
+                },
+              },
+            },
+            y: {
+              ticks: {
+                color: '#555',
+                font: {
+                  size: 12,
+                },
+              },
+            },
+          },
+        },
+      });
+    });
+  </script>
+
+{% endblock %}

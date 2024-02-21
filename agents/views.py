@@ -1,7 +1,7 @@
 import random
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import reverse
+from django.shortcuts import reverse, render, redirect
 from django.core.mail import send_mail 
 from leads.models import Agent
 from .forms import AgentModelForm
@@ -71,5 +71,4 @@ class AgentDeleteView(OrganisorAndLoginRequiredMixin, generic.DeleteView):
     def get_queryset(self):
         organisation = self.request.user.userprofile
         return Agent.objects.filter(organisation = organisation)
-    
     

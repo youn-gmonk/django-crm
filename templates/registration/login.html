@@ -3,21 +3,29 @@
 
 {% block content %}
 
-<div class="max-w-lg mx-auto">
-
-  <form method="post" class="mt-5">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="w-full text-white bg-blue-500 hover:bg-red-500 px-3 py-2 rounded-md" >
-    Login
-    </button>
-  </form> 
-  <div class="py-5 border-t border-gray-200 mt-5">
-  <a class="hover:text-blue-500 mt-3" href="{% url 'reset-password' %}">Forgot Password?</a>
+<body class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+<section class="text-white font-semibold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+  <div class="container px-5 py-24 mx-auto">
+    <form method="post" class="mt-5">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <style>
+          .crispy .form-control {
+              color: white;
+          }
+        </style>
+        <button type="submit" class="w-full text-white bg-blue-500 hover:bg-red-500 px-3 py-2 rounded-md">
+            Login
+        </button>
+    </form> 
+    <div class="py-5 border-t border-gray-200 mt-5">
+        <a class="text-white font-semibold hover:text-blue-500 mt-3" href="{% url 'reset-password' %}">Forgot Password?</a>
+    </div>
+    <div class="py-1 border-b border-gray-200">
+        <a class="text-white font-semibold hover:text-blue-500" href="{% url 'signup' %}">Don't have an account?</a>
+    </div>
   </div>
-  <div class="py-1 border-b border-gray-200">
-    <a class="hover:text-blue-500" href="{% url 'signup' %}">Don't have an account?</a>
-  </div>
-</div>
+</section>
+</body>
 
 {% endblock content %}

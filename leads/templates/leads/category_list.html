@@ -9,25 +9,26 @@
       <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-white">Categories</h1>
       <p class="sm:text-4xl text-3xl font-semibold title-font mb-2 text-white">These categories represent the status of the leads</p>
     </div>
+
     <div class="lg:w-2/3 w-full mx-auto overflow-auto bg-white shadow-md rounded-lg">
-      <table class="w-full text-left whitespace-no-wrap bg-white">
-        <thead>
+      <table class="table-auto w-full text-left whitespace-no-wrap">
+        <thead class="bg-blue-600 text-white">
           <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Status</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Lead Count</th>
+            <th class="px-4 py-3 text-sm uppercase tracking-wider">Status</th>
+            <th class="px-4 py-3 text-sm uppercase tracking-wider">Lead Count</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="px-4 py-3">Unassigned</td>
-            <td class="px-4 py-3">{{ unassigned_lead_count }}</td>
+          <tr class="bg-white">
+            <td class="px-4 py-3 whitespace-nowrap  text-gray-900">Unassigned</td>
+            <td class="px-4 py-3 whitespace-nowrap  text-gray-900">{{ unassigned_lead_count }}</td>
           </tr>
           {% for category in category_list %}
-            <tr>
-              <td class="px-4 py-3">
+            <tr class="bg-white"> 
+              <td class="px-4 py-3 whitespace-nowrap  text-gray-900">
                 <a href="{% url 'leads:category-detail' category.pk %}" class="text-blue-500 hover:underline">{{ category.name }}</a>
               </td>
-              <td class="px-4 py-3">Check by clicking on status</td>
+              <td class="px-4 py-3 whitespace-nowrap  text-gray-900">Check by clicking on status</td>
             </tr>
           {% endfor %}
         </tbody>

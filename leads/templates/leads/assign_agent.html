@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {% load tailwind_filters %}
 
- {% block content %}
+{% block content %}
+<body class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+<section class="text-gray-700 body-font bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white">
+  <div class="container px-5 py-24 mx-auto">
+    <a class="text-white font-semibold hover:text-blue-500" href="{% url 'leads:lead-list'%}">&larr; Go back to leads</a>
 
+    <div class="py-5 border-t border-gray-200 mt-5">
+        <h1 class="text-4xl text-white font-semibold">Assign an agent to this lead!</h1>
+    </div>
 
-<div class="max-w-lg mx-auto ">
-<a class="hover:text-blue-500" href="{% url 'leads:lead-list'%}">Go back to leads</a>
-
-<div class="py-5 border-t border-gray-200 mt-5">
-    <h1 class="text-4xl text-gray-800">Assign an agent to this lead!</h1>
-</div>
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-md" >Submit</button>
+        <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-md">Submit</button>
     </form>
-</div>
-{% endblock content%}
+  </div>
+</section>
+</body>
+{% endblock content %}
