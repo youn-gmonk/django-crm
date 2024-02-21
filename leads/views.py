@@ -10,9 +10,9 @@ from .forms import LeadForm, LeadModelForm , CustomUserCreationForm, AssignAgent
 from django.shortcuts import render
 from .models import Lead
 from django.db import models
-from django.db.models import Count, F, ExpressionWrapper, FloatField
+from django.db.models import Count, F, ExpressionWrapper, FloatField, Q
 from django.db.models.functions import TruncDay, TruncMonth
-from django.db.models import Count, Case, When, Value, IntegerField
+
 
 
 def lead_chart(request):
@@ -54,13 +54,17 @@ def lead_conversion(request):
 
     # Monthly conversion rate
     monthly_conversion_data = Lead.objects.annotate(month=TruncMonth('date_added')).values('month').annotate(
-        monthly_conversion=ExpressionWrapper(
-            Count('id', filter=models.Q(category__name='Converted')),
-            output_field=FloatField()
-        ) / Count('id', output_field=FloatField()) * 100
+        total_leads=Count('id'),
+        converted_leads=Count('id', filter=Q(category__name='Converted')),
     )
     monthly_labels = [str(item['month']) for item in monthly_conversion_data]
-    monthly_conversion_data = [item['monthly_conversion'] for item in monthly_conversion_data]
+    monthly_conversion_data = [
+        (converted / total) * 100 if total > 0 else 0
+        for total, converted in zip(
+            [item['total_leads'] for item in monthly_conversion_data],
+            [item['converted_leads'] for item in monthly_conversion_data]
+        )
+    ]
 
     context = {
         'title': 'Lead Conversion',
