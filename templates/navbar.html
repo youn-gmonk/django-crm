@@ -8,17 +8,17 @@
                 <a href="{% url 'signup' %}" class="mr-5 hover:text-gray-900">Signup</a>
             {% else %}
                 {% if request.user.is_organisor %}
-                    <a href="{% url 'leads:lead-chart' %}" class="mr-3 hover:text-gray-700">Leads/Day</a>
-                    <a href="{% url 'leads:lead-conversion' %}" class="mr-3 hover:text-gray-700">Lead Conversion</a>
-                    <a href="{% url 'leads:lead-list' %}" class="mr-3 hover:text-gray-700">Leads</a>    
+                    <a href="{% url 'leads:lead-list' %}" class="mr-3 hover:text-gray-700">Leads</a>
+                    <a href="{% url 'leads:lead-chart' %}" class="mr-3 hover:text-gray-700">Lead Analysis</a>
+                    <a href="{% url 'leads:lead-conversion' %}" class="mr-3 hover:text-gray-700">Lead Conversion</a>     
                 {% endif %}
                 
-                <a href="{% url 'agents:agent-list' %}" class="mr-3 hover:text-gray-700">Agents</a>
+                <a href="{% url 'agents:agent-list' %}" class="mr-3 hover:text-gray-900">Agents</a>
             {% endif %}
         </nav>
         {% if request.user.is_authenticated %}
             <div class="text-white">
-                Logged in as: {{ request.user.username }}
+                Logged in: {{ request.user.username }}
                 <a href="{% url 'logout' %}" class="ml-3 inline-flex items-center bg-white-200 border-0 py-1 px-3 focus:outline-none hover:bg-white-300 rounded text-base mt-4 md:mt-0">
                     Logout
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
