@@ -78,6 +78,8 @@ def lead_conversion(request):
 
     return render(request, 'leads/lead_conversion.html', context)
 
+
+
 class SignupView(generic.CreateView):
     template_name = "registration/signup.html"
     form_class = CustomUserCreationForm

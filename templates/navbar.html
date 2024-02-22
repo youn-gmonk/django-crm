@@ -8,12 +8,12 @@
                 <a href="{% url 'signup' %}" class="mr-5 hover:text-gray-900">Signup</a>
             {% else %}
                 {% if request.user.is_organisor %}
-                    <a href="{% url 'leads:lead-chart' %}" class="mr-3 hover:text-gray-900">Lead Analysis</a>
-                    <a href="{% url 'leads:lead-conversion' %}" class="mr-3 hover:text-gray-900">Lead Conversion</a>
-                    <a href="{% url 'leads:lead-list' %}" class="mr-3 hover:text-gray-900">Leads</a>    
+                    <a href="{% url 'leads:lead-chart' %}" class="mr-3 hover:text-gray-700">Leads/Day</a>
+                    <a href="{% url 'leads:lead-conversion' %}" class="mr-3 hover:text-gray-700">Lead Conversion</a>
+                    <a href="{% url 'leads:lead-list' %}" class="mr-3 hover:text-gray-700">Leads</a>    
                 {% endif %}
                 
-                <a href="{% url 'agents:agent-list' %}" class="mr-3 hover:text-gray-900">Agents</a>
+                <a href="{% url 'agents:agent-list' %}" class="mr-3 hover:text-gray-700">Agents</a>
             {% endif %}
         </nav>
         {% if request.user.is_authenticated %}

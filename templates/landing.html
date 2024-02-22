@@ -2,23 +2,45 @@
 {% load static %}
 
 {% block content %}
-<section class="text-gray-600 body-font">
-  <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-    <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="{% static 'images/dashboard.jpg' %}">
-    <div class="text-center lg:w-2/3 w-full">
-      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-        CRM built with django
+<body class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+<section class="text-gray-800 body-font">
+<div class="container mx-auto flex px-5 py-10 items-center justify-center flex-col">
+<div class="text-top lg:w-2/3 w-full">
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-bold text-white">
+        EDGE CRM 
       </h1>
-      <p class="mb-8 leading-relaxed">
-        A Django-based CRM streamlines lead management with seamless data organization, automated workflows, and insightful analytics.
-      </p>
-      <div class="flex justify-center">
-        <a href="{% url 'login' %}" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-          Login to get started
-        </a>
-      </div>
-    </div>
+      <h3 class="mb-8 leading-relaxed text-white font-semibold">
+        Experience the power of our CRM, a comprehensive solution designed to elevate your business to new heights.
+        Empower your business with actionable data and drive success with our EDGE CRM – where innovation meets efficiency.
+      </h3>
   </div>
-</section>
-{% endblock content %}
+    <img class="lg:w-2/3 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="{% static 'images/dashboard.jpg' %}">
+    </div>
+  {% block styles %}
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
 
+  section {
+    padding: 4rem 0;
+  }
+
+  h1 {
+    color: #ffffff; /* Text color for the title */
+  }
+
+  p {
+    color: #ffffff; /* Text color for the paragraph */
+  }
+
+  a {
+    color: #ffffff;
+  }
+
+</style>
+
+</section>
+</body>
+{% endblock styles %}
+{% endblock content %}

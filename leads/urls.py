@@ -20,6 +20,4 @@ urlpatterns = [
     path('categories/<int:pk>/',CategoryDetailView.as_view() , name='category-detail'),
     path('leads/chart/', lead_chart, name='lead-chart'),
     path('leads/conversion/', lead_conversion, name='lead-conversion'),
-    
-    
 ]
