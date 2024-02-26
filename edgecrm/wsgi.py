@@ -14,6 +14,7 @@ from whitenoise.middleware import WhiteNoiseMiddleware
 
 application = get_wsgi_application()
 application = WhiteNoiseMiddleware(application)
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'edgecrm.settings')
-app = application
+
 
