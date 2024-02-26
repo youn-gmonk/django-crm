@@ -13,7 +13,7 @@ from django.core.wsgi import get_wsgi_application
 from whitenoise.middleware import WhiteNoiseMiddleware
 
 application = get_wsgi_application()
-application = WhiteNoiseMiddleware(application)
+application = WhiteNoiseMiddleware
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'edgecrm.settings')
 
