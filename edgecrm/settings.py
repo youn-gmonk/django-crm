@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import dj_database_url
 from pathlib import Path
 import environ, os
+from urllib.parse import urlparse
 
 env = environ.Env(
     DEBUG=(bool, False)
@@ -82,19 +83,19 @@ WSGI_APPLICATION = 'edgecrm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+database_url = os.environ.get("DATABASE_URL", "sqlite:///:memory:")
+url = urlparse(database_url)
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': url.path[1:],
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
     }
 }
-
-databse_url = os.environ.get("DATABASE_URL")
-DATABASES["default"] = dj_database_url.parse("database_url")
 
 
 # Password validation
