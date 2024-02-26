@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
-import environ
+import environ, os
 
 env = environ.Env(
     DEBUG=(bool, False)
@@ -25,7 +26,7 @@ SECRET_KEY = env('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -91,6 +92,9 @@ DATABASES = {
         'PORT': env("DB_PORT"),
     }
 }
+
+databse_url = os.environ.get("DATABASE_URL")
+DATABASES ["default"] = dj_database_url.parse("database_url")
 
 
 # Password validation
