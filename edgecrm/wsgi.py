@@ -12,9 +12,14 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise.middleware import WhiteNoiseMiddleware
 
-application = get_wsgi_application()
-application = WhiteNoiseMiddleware
+# Get the Django application instance
+django_application = get_wsgi_application()
 
+# Wrap the Django application with WhiteNoiseMiddleware
+application = WhiteNoiseMiddleware(django_application)
+
+# Set the DJANGO_SETTINGS_MODULE environment variable
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'edgecrm.settings')
+
 
 
