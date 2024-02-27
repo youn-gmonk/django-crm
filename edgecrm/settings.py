@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from decouple import config as env
 import dj_database_url
 from pathlib import Path
 import os
@@ -161,3 +162,13 @@ if not DEBUG:
     X_FRAME_OPTIONS = "DENY"
 
     ALLOWED_HOSTS = ["*"]
+
+    EMAIL_HOST = env("EMAIL_HOST")
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = env("EMAIL_PORT")
+    DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+
+    #password for postmaster@mg.domain.com 38e485779a7e6dc2050ad926c1aa4a4e-b7b36bc2-f64228d0
+    #password for navadkarsoham191@mg.edgecrm.onrender.com 6a76d5a3898445469c37cade6ba3b679-b7b36bc2-a627c2cc
