@@ -167,6 +167,7 @@ if not DEBUG:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
+    
 
     EMAIL_HOST_USER = 'navadkarsoham191@gmail.com'
     EMAIL_HOST_PASSWORD = 'fidi pkxi jllv uhdy'
