@@ -150,7 +150,7 @@ CRISPY_TEMPLATE_PACK = 'tailwind'
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
@@ -166,9 +166,7 @@ if not DEBUG:
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_USE_SSL = False
     
-
     EMAIL_HOST_USER = 'navadkarsoham191@gmail.com'
     EMAIL_HOST_PASSWORD = 'fidi pkxi jllv uhdy'
     DEFAULT_FROM_EMAIL = 'navadkarsoham191@gmail.com'
