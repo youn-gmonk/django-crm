@@ -1,6 +1,11 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import send_mail
+
 
 class User(AbstractUser):
     is_organisor = models.BooleanField(default=True)
@@ -27,6 +32,14 @@ class Lead(models.Model):
     email = models.EmailField()
     is_converted = models.BooleanField(default=False)
 
+    def send_lead_created_email(sender, instance, created, **kwargs):
+        if created:
+            subject = f'Welcome, {instance.first_name} {instance.last_name} '
+            message = f'Thank you for your interest, {instance.first_name}!'
+            from_email = 'your_gmail_account@gmail.com'
+            recipient_list = [instance.email]
+
+            send_mail(subject, message, from_email, recipient_list)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"   

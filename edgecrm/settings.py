@@ -162,13 +162,17 @@ if not DEBUG:
 
     ALLOWED_HOSTS = ["*"]
 
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = env("EMAIL_HOST")
-    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_PORT = env("EMAIL_PORT")
-    DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+    EMAIL_USE_SSL = False
+
+    EMAIL_HOST_USER = 'navadkarsoham191@gmail.com'
+    EMAIL_HOST_PASSWORD = 'fidi pkxi jllv uhdy'
+    DEFAULT_FROM_EMAIL = 'navadkarsoham191@gmail.com'
+
+
 
     #password for postmaster@mg.domain.com 38e485779a7e6dc2050ad926c1aa4a4e-b7b36bc2-f64228d0
     #password for navadkarsoham191@mg.edgecrm.onrender.com 6a76d5a3898445469c37cade6ba3b679-b7b36bc2-a627c2cc
