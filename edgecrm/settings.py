@@ -141,7 +141,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'leads.User'
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 LOGIN_REDIRECT_URL = "/leads"
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = "/"
@@ -163,6 +162,7 @@ if not DEBUG:
 
     ALLOWED_HOSTS = ["*"]
 
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_HOST = env("EMAIL_HOST")
     EMAIL_HOST_USER = env("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
