@@ -89,7 +89,7 @@ DATABASES = {
         'USER': 'edgecrmuser',
         'PASSWORD': '12345678',
         'HOST': 'localhost',
-        'PORT':  '5432',
+        'PORT':  'postgres://edgecrmuser:SRH7unUmYbCtsNsu6cm1q3pxgKsB5DmE@dpg-cnec208l6cac73bi78g0-a/edgecrm',
     }
 }
 
