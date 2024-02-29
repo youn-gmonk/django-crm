@@ -36,7 +36,7 @@ class Lead(models.Model):
     @receiver(post_save, sender='leads.Lead')
     def send_lead_created_email(sender, instance, created, **kwargs):
         if created:
-            subject = 'WELCOME!{}'.format(instance.first_name)
+            subject = 'WELCOME!{} '.format(instance.first_name)
             message = 'Dear {},\n\nWelcome to our family! Thank you for your interest. As a special token of our appreciation, enjoy a 15% discount on your first order with the coupon code WELCOME15. We look forward to serving you!\n\nBest regards,\n'.format(instance.first_name)
             from_email = 'navadkarsoham191@gmail.com'
             recipient_list = [instance.email]
