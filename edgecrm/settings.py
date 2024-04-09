@@ -18,7 +18,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = 'rhhp dmns imjb xnfn'
+EMAIL_HOST_PASSWORD = 'gdkp fucv lfpr tjkh'
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 #'rhhp dmns imjb xnfn'
 
